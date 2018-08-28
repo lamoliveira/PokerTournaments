@@ -17,8 +17,27 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [3,10]
+      }
+    },
+
   });
+
+  
+  User.associate = function(models) {
+    // Associating User with tournaments
+    // When an user is deleted, also delete any associated tournaments
+    User.hasMany(models.Tournament, {
+      onDelete: "cascade"
+    });
+  };
+
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);

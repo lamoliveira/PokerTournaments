@@ -25,7 +25,36 @@ module.exports = function(app) {
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, function(req, res) {
+    console.log("******get members");
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
+
+  
+  // index route loads view.html
+  app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/blog.html"));
+  });
+
+  // cms route loads cms.html
+  app.get("/cms", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/cms.html"));
+  });
+
+  // blog route loads blog.html
+  app.get("/blog", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/blog.html"));
+  });
+
+  // authors route loads author-manager.html
+  app.get("/authors", function(req, res) {
+    console.log("******get authors");
+    res.sendFile(path.join(__dirname, "../public/author-manager.html"));
+  });
+
+    // authors route loads author-manager.html
+    app.get("/tournaments", function(req, res) {
+      console.log("******get tournaments");
+      res.sendFile(path.join(__dirname, "../public/tournament.html"));
+    });
 
 };
