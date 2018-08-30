@@ -16,15 +16,15 @@ module.exports = function(app) {
   app.get("/api/tournaments", function(req, res) {
     var query = {};
     console.log("api/tournaments");
-    if (req.query.userid) {
-      query.UserId = req.query.userid;
+    if (req.query.leagueid) {
+      query.LeagueId = req.query.leagueid;
     }
     // Here we add an "include" property to our options in our findAll query
     // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.User
+    // In this case, just db.League
     db.Tournament.findAll({
       where: query,
-      include: [db.User]
+      include: [db.League]
     }).then(function(dbTournament) {
       console.log("dbTournament");  
       res.json(dbTournament);
@@ -35,12 +35,12 @@ module.exports = function(app) {
   app.get("/api/tournaments/:id", function(req, res) {
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.User
+    // In this case, just db.League
     db.Tournament.findOne({
       where: {
         id: req.params.id
       },
-      include: [db.User]
+      include: [db.League]
     }).then(function(dbTournament) {
       res.json(dbTournament);
     });

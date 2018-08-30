@@ -1,38 +1,38 @@
 $(document).ready(function() {
-    // Getting jQuery references to the tournament name, rules, date, user, form select
+    // Getting jQuery references to the tournament name, rules, date, league, form select
     var tournamentnameInput = $("#tournamentname-input");
     var tournamentdateInput = $("#tournamentdate-input");
     var tournamentrulesInput = $("#tournamentrules-input");
     var tournamentForm = $("#tournament");
-    var userSelect = $("#user");
+    var leagueSelect = $("#league");
     // Adding an event listener for when the form is submitted
     $(tournamentForm).on("submit", handleFormSubmit);
     // Gets the part of the url that comes after the "?" (which we have if we're updating a tournament)
     var url = window.location.search;
     var tournamentId;
-    var userId;
+    var leagueId;
     // Sets a flag for whether or not we're updating a tournament to be false initially
     var updating = false;
   
     // If we have this section in our url, we pull out the tournament id from the url
     // In '?tournament_id=1', tournamentId is 1
-    if (url.indexOf("?tournament_id=") !== -1) {
+    if (url.indexOf("?tournamentid=") !== -1) {
       tournamentId = url.split("=")[1];
       getTournamentData(tournamentId, "tournament");
     }
-    // Otherwise if we have an user_id in our url, preset the user select box to be our User
-    else if (url.indexOf("?user_id=") !== -1) {
-      userId = url.split("=")[1];
+    // Otherwise if we have an league_id in our url, preset the league select box to be our League
+    else if (url.indexOf("?leagueid=") !== -1) {
+      leagueId = url.split("=")[1];
     }
   
-    // Getting the users, and their tournaments
-    getUsers();
+    // Getting the leagues, and their tournaments
+    getLeagues();
   
     // A function for handling what happens when the form to create a new tournament is submitted
     function handleFormSubmit(event) {
       event.preventDefault();
-      // Wont submit the tournament if we are missing a tournamentname, tournamentrules, or user
-      if (!tournamentrulesInput.val().trim() || !tournamentnameInput.val().trim() || !tournamentdateInput.val() || !userSelect.val()) {
+      // Wont submit the tournament if we are missing a tournamentname, tournamentrules, or league
+      if (!tournamentrulesInput.val().trim() || !tournamentnameInput.val().trim() || !tournamentdateInput.val() || !leagueSelect.val()) {
         return;
       }
       // Constructing a newTournament object to hand to the database
@@ -45,7 +45,7 @@ $(document).ready(function() {
         tournamentname: tournamentnameInput
           .val()
           .trim(),
-        UserId: userSelect.val()
+        LeagueId: leagueSelect.val()
       };
   
       // If we're updating a tournament run updateTournament to update a tournament
@@ -59,34 +59,34 @@ $(document).ready(function() {
       }
     }
   
-    // Submits a new tournament and brings user to blog page upon completion
+    // Submits a new tournament and brings league to blog page upon completion
     function submitTournament(tournament) {
       $.post("/api/tournaments", tournament, function() {
         window.location.href = "/tournaments";
       });
     }
   
-    // Gets tournament data for the current tournament if we're editing, or if we're adding to an user's existing tournaments
+    // Gets tournament data for the current tournament if we're editing, or if we're adding to an league's existing tournaments
     function getTournamentData(id, type) {
       var queryUrl;
       switch (type) {
       case "tournament":
         queryUrl = "/api/tournaments/" + id;
         break;
-      case "user":
-        queryUrl = "/api/users/" + id;
+      case "league":
+        queryUrl = "/api/leagues/" + id;
         break;
       default:
         return;
       }
       $.get(queryUrl, function(data) {
         if (data) {
-          console.log(data.UserId || data.id);
+          console.log(data.LeagueId || data.id);
           // If this tournament exists, prefill our tournament forms with its data
           tournamentrulesInput.val(data.tournamentrules);
           tournamentnameInput.val(data.tournamentname);
           tournamentdateInput.val(data.tournamentdate);
-          userId = data.UserId || data.id;
+          leagueId = data.LeagueId || data.id;
           // If we have a tournament with this id, set a flag for us to know to update the tournament
           // when we hit submit
           updating = true;
@@ -94,37 +94,39 @@ $(document).ready(function() {
       });
     }
   
-    // A function to get Users and then render our list of Users
-    function getUsers() {
-      $.get("/api/users", renderUserList);
+    // A function to get Leagues and then render our list of Leagues
+    function getLeagues() {
+      $.get("/api/leagues", renderLeagueList);
     }
-    // Function to either render a list of users, or if there are none, direct the user to the page
-    // to create an user first
-    function renderUserList(data) {
+    // Function to either render a list of leagues, or if there are none, direct the league to the page
+    // to create an league first
+    function renderLeagueList(data) {
       if (!data.length) {
-        window.location.href = "/users";
+        window.location.href = "/leagues";
       }
       $(".hidden").removeClass("hidden");
       var rowsToAdd = [];
       for (var i = 0; i < data.length; i++) {
-        rowsToAdd.push(createUserRow(data[i]));
+        rowsToAdd.push(createLeagueRow(data[i]));
       }
-      userSelect.empty();
+      leagueSelect.empty();
       console.log(rowsToAdd);
-      console.log(userSelect);
-      userSelect.append(rowsToAdd);
-      userSelect.val(userId);
+      console.log(leagueSelect);
+      leagueSelect.append(rowsToAdd);
+      leagueSelect.val(leagueId);
     }
   
-    // Creates the user options in the dropdown
-    function createUserRow(user) {
+    // Creates the league options in the dropdown
+    function createLeagueRow(league) {
       var listOption = $("<option>");
-      listOption.attr("value", user.id);
-      listOption.text(user.username);
+      console.log(league);
+      console.log(league.name);
+      listOption.attr("value", league.id);
+      listOption.text(league.name);
       return listOption;
     }
   
-    // Update a given tournament, bring user to the blog page when done
+    // Update a given tournament, bring league to the blog page when done
     function updateTournament(tournament) {
       $.ajax({
         method: "PUT",

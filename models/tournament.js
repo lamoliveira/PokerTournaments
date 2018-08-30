@@ -20,9 +20,9 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Tournament.associate = function(models) {
-    // We're saying that a Tournament should belong to an user
-    // A tounment can't be created without an user due to the foreign key constraint
-    Tournament.belongsTo(models.User, {
+    // We're saying that a Tournament should belong to an league
+    // A tounment can't be created without an league due to the foreign key constraint
+    Tournament.belongsTo(models.League, {
       foreignKey: {
         allowNull: false
       }

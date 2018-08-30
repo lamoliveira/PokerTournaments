@@ -26,6 +26,7 @@ require("./routes/api-routes.js")(app);
 require("./routes/author-api-routes.js")(app);
 require("./routes/post-api-routes.js")(app);
 require("./routes/tournament-api-routes.js")(app);
+require("./routes/league-api-routes.js")(app);
 require("./routes/user-api-routes.js")(app);
 
 // Syncing our database and logging a message to the user upon success

@@ -3,38 +3,38 @@ $(document).ready(function() {
 
   // tournamentContainer holds all of our tournaments
   var tournamentContainer = $(".tournament-container");
-  //var tournamentUserSelect = $("#user");
+  //var tournamentLeagueSelect = $("#league");
   // Click events for the edit and delete buttons
   $(document).on("click", "button.delete", handleTournamentDelete);
   $(document).on("click", "button.edit", handleTournamentEdit);
   // Variable to hold our tournaments
   var tournaments;
 
-  // The code below handles the case where we want to get tournament tournaments for a specific user
-  // Looks for a query param in the url for user_id
+  // The code below handles the case where we want to get tournament tournaments for a specific league
+  // Looks for a query param in the url for league_id
   var url = window.location.search;
-  //var userId;
-  //if (url.indexOf("?user_id=") !== -1) {
-  //  userId = url.split("=")[1];
-  //  getTournaments(userId);
+  //var leagueId;
+  //if (url.indexOf("?league_id=") !== -1) {
+  //  leagueId = url.split("=")[1];
+  //  getTournaments(leagueId);
   //}
-  // If there's no userId we just get all tournaments as usual
+  // If there's no leagueId we just get all tournaments as usual
   //else {
     getTournaments();
   //}
 
 
   // This function grabs tournaments from the database and updates the view
-  function getTournaments(user) {
-    userId = user || "";
-    if (userId) {
-      userId = "/?user_id=" + userId;
+  function getTournaments(league) {
+    leagueId = league || "";
+    if (leagueId) {
+      leagueId = "/?leagueid=" + leagueId;
     }
-    $.get("/api/tournaments" + userId, function(data) {
+    $.get("/api/tournaments" + leagueId, function(data) {
       console.log("tournaments", data);
       tournaments = data;
       if (!tournaments || !tournaments.length) {
-        displayEmpty(user);
+        displayEmpty(league);
       }
       else {
         initializeRows();
@@ -49,7 +49,7 @@ $(document).ready(function() {
       url: "/api/tournaments/" + id
     })
       .then(function() {
-        getTournaments(tournamentUserSelect.val());
+        getTournaments(tournamentLeagueSelect.val());
       });
   }
 
@@ -79,10 +79,10 @@ $(document).ready(function() {
     editBtn.addClass("edit btn btn-info");
     var newTournamentName = $("<h2>");
     var newTournamentDate = $("<small>");
-    var newTournamentUser = $("<h5>");
+    var newTournamentLeague = $("<h5>");
     var newTournamentRules = $("<p>");
-    newTournamentUser.text("Written by: " + post.User.name);
-    newTournamentUser.css({
+    newTournamentLeague.text("Written by: " + post.League.name);
+    newTournamentLeague.css({
       float: "right",
       color: "blue",
       "margin-top":
@@ -98,7 +98,7 @@ $(document).ready(function() {
     newTournamentCardHeading.append(deleteBtn);
     newTournamentCardHeading.append(editBtn);
     newTournamentCardHeading.append(newTournamentName);
-    newTournamentCardHeading.append(newTournamentUser);
+    newTournamentCardHeading.append(newTournamentLeague);
     newTournamentCardBody.append(newTournamentBody);
     newTournamentCard.append(newTournamentCardHeading);
     newTournamentCard.append(newTournamentCardBody);
@@ -129,7 +129,7 @@ $(document).ready(function() {
     var query = window.location.search;
     var partial = "";
     if (id) {
-      partial = " for User #" + id;
+      partial = " for League #" + id;
     }
     tournamentContainer.empty();
     var messageH2 = $("<h2>");
