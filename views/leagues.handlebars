@@ -1,0 +1,15 @@
+<style media="screen">
+  li {
+    height : 400px;
+    width: 500px;
+    margin-bottom: 30px;
+  }
+</style>
+
+<h1>Leagues</h1>
+
+<ul>
+{{#each league }}
+  <li>{{name}} , {{description}} , {{createdAt}}</li>
+{{/each}}
+</ul>

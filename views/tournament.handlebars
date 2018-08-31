@@ -1,0 +1,15 @@
+<style media="screen">
+  li {
+    height : 400px;
+    width: 500px;
+    margin-bottom: 30px;
+  }
+</style>
+
+<h1>tournaments</h1>
+
+<ul>
+{{#each tournament }}
+  <li>{{tournamentname}} , {{tournamentdate}} , {{tournamentrules}}</li>
+{{/each}}
+</ul>
