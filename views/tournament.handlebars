@@ -1,15 +1,60 @@
-<style media="screen">
-  li {
-    height : 400px;
-    width: 500px;
-    margin-bottom: 30px;
-  }
-</style>
+<head>
+  <meta charset="UTF-8">
+  <title>Easy Poker</title>
 
-<h1>tournaments</h1>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- LINK TO FIREBASE GOES HERE -->
+  <!--<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script> -->
+  <!-- Moment.js Reference -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <link rel="stylesheet" href="stylesheets/style.css" media="screen" title="no title">
+  <link rel="stylesheet" href="stylesheets/trainstyle.css">
 
-<ul>
-{{#each tournament }}
-  <li>{{tournamentname}} , {{tournamentdate}} , {{tournamentrules}}</li>
-{{/each}}
-</ul>
+</head>
+<div class="container">
+
+  <br>
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <h1 class="text-center">Easy Poker</h1>
+    <p class="text-center">Simplifies your Game</p>
+  </div>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-md-2 col-sm-2">
+        <a class="btn btn-light" href="/cms">Add Rule</a>
+      </div>
+      <div class="col-md-1 col-sm-1">
+        <a class="btn btn-light" href="/blog">Rules</a>
+      </div>
+      <div class="col-md-1 col-sm-1">
+        <a class="btn btn-light" href="/authors"> Authors</a>
+      </div>
+      <div class="col-md-2 col-sm-2">
+        <a class="btn btn-light" href="/tours">Tournaments</a>
+      </div>
+
+      <div class="col-md-2 col-sm-2">
+        <a class="btn btn-light" href="/tournaments">Add Tournaments</a>
+      </div>
+      <div class="col-md-2 col-sm-2">
+        <a class="btn btn-light" href="/leagues">leagues</a>
+      </div>
+      <div class="col-md-2 col-sm-2">
+        <a class="btn btn-light" href="/train">train</a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <ul>
+        {{#each tournament }}
+        <li>{{tournamentname}} , {{tournamentdate}} , {{tournamentrules}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>

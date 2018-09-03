@@ -27,6 +27,14 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
+    // We're saying that a Tournament should use one deck
+    // A tounment can't be created without an deck due to the foreign key constraint
+  /*  Tournament.belongsTo(models.Deck, {
+      foreignKey: {
+        allowNull: false
+      }
+    });*/
+//    Tournament.hasMany(User, {as: 'Players'});
   };
 
   return Tournament;

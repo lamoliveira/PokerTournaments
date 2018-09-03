@@ -12,9 +12,7 @@ module.exports = function (sequelize, DataTypes) {
   League.associate = function (models) {
     // Associating League with Tournaments
     // When an League is deleted, also delete any associated Tournaments
-    League.hasMany(models.Tournament, {
-      onDelete: "cascade"
-    });
+    League.hasMany(models.Tournament, {   });
     League.belongsTo(models.User, {
       foreignKey: {
         allowNull: false

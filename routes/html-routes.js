@@ -45,6 +45,11 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/blog.html"));
   });
 
+ // blog route loads blog.html
+  app.get("/train", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/train.html"));
+  });
+
   // authors route loads author-manager.html
   app.get("/authors", function(req, res) {
     console.log("******get authors");
@@ -56,7 +61,7 @@ module.exports = function(app) {
       console.log("******get tournaments");
       res.sendFile(path.join(__dirname, "../public/tournament.html"));
     });
-    app.get("/testleague", function (req, res) {
+    app.get("/leagues", function (req, res) {
       db.League.findAll({
         //include: [db.Tournament]
       }).then(function (dbLeague) {
