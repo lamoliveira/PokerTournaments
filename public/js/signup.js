@@ -33,7 +33,8 @@ $(document).ready(function() {
       email: email,
       password: password
     }).then(function(data) {
-      window.location.replace(data);
+     // window.location.replace(data);
+      window.location.href = "/login";
       // If there's an error, handle it by throwing up a bootstrap alert
     }).catch(handleLoginErr);
   }
