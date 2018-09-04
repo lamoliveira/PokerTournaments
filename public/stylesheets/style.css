@@ -49,3 +49,37 @@ button.edit {
 .top-30 {
   margin-top: 30px;
 }
+
+.table{
+  border: 1px solid aquamarine;
+  }
+  
+  #table-train{
+    border: 1px solid aquamarine;
+    text-align: center;
+    margin: 1%;
+    }
+    #form-train{
+      border: 1px solid aquamarine;
+      text-align: center;
+      padding: 50px;
+      }
+      .form-group{
+        text-align: left;
+        margin: 1%;
+      }
+      .form-control{
+        text-align: left;
+    
+      }
+      .label-train{
+       box-align: left; 
+       font-size: 14px;
+      }
+    #add-train{
+      border: 1px solid aquamarine;
+      text-align: center;
+      background-color:  aquamarine;
+      }
+    
+  
