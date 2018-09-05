@@ -2,6 +2,16 @@ $(document).ready(function() {
     // Getting jQuery references to the tournament name, rules, date, league, form select
     var tournamentnameInput = $("#tournamentname-input");
     var tournamentdateInput = $("#tournamentdate-input");
+    
+    var buyinInput = $("#buyin-input");
+    var buyinstakesInput = $("#buyinstakes-input");
+    
+    var rebuyInput = $("#rebuy-input");
+    var rebuystakesInput = $("#rebuystakes-input");
+    
+    var addonInput = $("#addon-input");
+    var addonstakesInput = $("#addonstakes-input");
+    
     var tournamentrulesInput = $("#tournamentrules-input");
     var tournamentForm = $("#tournament");
     var leagueSelect = $("#league");
@@ -40,8 +50,34 @@ $(document).ready(function() {
         tournamentrules: tournamentrulesInput
           .val()
           .trim(),
+
         tournamentdate: tournamentdateInput
         .val(),
+        
+        buyin: buyinInput
+          .val()
+          .trim(),
+        
+          buyinstakes: buyinstakesInput
+          .val()
+          .trim(),
+
+          rebuy: rebuyInput
+          .val()
+          .trim(),
+        
+          rebuystakes: rebuystakesInput
+          .val()
+          .trim(),
+          
+          addon: addonInput
+          .val()
+          .trim(),
+        
+          addonstakes: addonstakesInput
+          .val()
+          .trim(),
+          
         tournamentname: tournamentnameInput
           .val()
           .trim(),
@@ -62,7 +98,7 @@ $(document).ready(function() {
     // Submits a new tournament and brings league to blog page upon completion
     function submitTournament(tournament) {
       $.post("/api/tournaments", tournament, function() {
-        window.location.href = "/tournaments";
+        window.location.href = "/tours";
       });
     }
   
@@ -86,6 +122,8 @@ $(document).ready(function() {
           tournamentrulesInput.val(data.tournamentrules);
           tournamentnameInput.val(data.tournamentname);
           tournamentdateInput.val(data.tournamentdate);
+
+          //finish form
           leagueId = data.LeagueId || data.id;
           // If we have a tournament with this id, set a flag for us to know to update the tournament
           // when we hit submit
