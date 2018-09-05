@@ -15,16 +15,35 @@
 </head>
 
 <div class="container">
-
   <br>
-
-  <div class="container">
-    <div class="row">
-      <ul>
+  <div class="table-responsive">
+    <table style="border-color: #1c0603" class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Buy in</th>
+          <th>Buy in stakes</th>
+          <th>Rebuy</th>
+          <th>Rebuy Stakes</th>
+          <th>Add on</th>
+          <th>Add on Stakes</th>
+          <th>Rules</th>
+          
+        </tr>
+      </thead>
+      <tbody>
         {{#each tournament }}
-        <li>{{tournamentname}} , {{tournamentdate}} , {{tournamentrules}}</li>
+        <tr>
+          <td>{{tournamentname}}</td>
+          <td>{{buyin}}</td>
+          <td>{{buyinstakes}}</td>
+          <td>{{rebuy}}</td>
+          <td>{{rebuystakes}}</td>
+          <td>{{addon}}</td>
+          <td>{{addonstakes}}</td>
+          <td>{{tournamentrules}}</td>
+          
+        </tr>
         {{/each}}
-      </ul>
-    </div>
   </div>
 </div>

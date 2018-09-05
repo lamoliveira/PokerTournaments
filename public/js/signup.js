@@ -33,10 +33,16 @@ $(document).ready(function() {
       email: email,
       password: password
     }).then(function(data) {
-     // window.location.replace(data);
-      window.location.href = "/login";
-      // If there's an error, handle it by throwing up a bootstrap alert
-    }).catch(handleLoginErr);
+      console.log(data);
+       window.location.href = "/tours";
+    }).catch(function (err) {
+      console.log(err);
+      console.log(err.errors[0]);
+      
+      console.log(err.errors[0].ValidationErrorItem);
+      $("#signuperror").text(err.errors[0].ValidationErrorItem.message);   
+    //window.location.href = "/tours";
+    });
   }
 
   function handleLoginErr(err) {

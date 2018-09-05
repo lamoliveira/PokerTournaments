@@ -36,6 +36,7 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.League, {
       onDelete: "cascade"
     });
+    User.belongsToMany(models.Tournament, { through: models.Player });
   };
 
   
