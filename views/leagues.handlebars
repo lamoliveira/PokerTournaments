@@ -11,10 +11,27 @@
 <div class="container">
 
   <div class="row">
-    <ul>
+  <!--  <ul>
       {{#each league }}
       <li>{{name}} , {{description}} , {{createdAt}}</li>
       {{/each}}
     </ul>
-  </div>
-</div>
+-->
+    <div class="table-responsive">
+      <table style="border-color: #1c0603" class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+             {{#each league }}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{description}} </td>
+            <td>{{createdAt}}</td>
+          </tr>
+             {{/each}}
+    </div>
